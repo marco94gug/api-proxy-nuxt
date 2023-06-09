@@ -1,3 +1,5 @@
+import { defineEventHandler, setResponseHeaders } from "h3";
+
 export default defineEventHandler((event) => {
   setResponseHeaders(event, {
     "Access-Control-Allow-Methods": "GET",
@@ -6,9 +8,4 @@ export default defineEventHandler((event) => {
     "Access-Control-Allow-Headers": "*",
     "Access-Control-Expose-Headers": "*",
   });
-  if (getMethod(event) === "OPTIONS") {
-    event.node.res.statusCode = 204;
-    event.node.res.statusMessage = "No Content.";
-    return "OK";
-  }
 });
